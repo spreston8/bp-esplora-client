@@ -330,7 +330,7 @@ impl BlockingClient {
         &self,
         address: &Address,
         last_seen: Option<Txid>,
-    ) -> Result<Vec<Tx>, Error> {
+    ) -> Result<Vec<crate::Tx>, Error> {
         let path = match last_seen {
             Some(last_seen) => format!("/address/{address}/txs/chain/{last_seen}"),
             None => format!("/address/{address}/txs"),
