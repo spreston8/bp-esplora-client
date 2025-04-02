@@ -10,7 +10,7 @@ documentation = "https://docs.rs/bp-esplora/"
 description = "Bitcoin Esplora API client library not using rust-bitcoin. Blocking or async"
 keywords = ["bitcoin", "esplora"]
 readme = "README.md"
-rust-version = "1.77.0" # Due to `bp-std`
+rust-version = "1.81.0"
 
 [lib]
 name = "esplora"
@@ -48,3 +48,7 @@ async-https = ["async", "reqwest/default-tls"]
 async-https-native = ["async", "reqwest/native-tls"]
 async-https-rustls = ["async", "reqwest/rustls-tls"]
 async-https-rustls-manual-roots = ["async", "reqwest/rustls-tls-manual-roots"]
+
+[patch.crates-io]
+bp-core = { git = "https://github.com/zoedberg/bp-core", branch = "0.11.1-2" }
+bp-invoice = { git = "https://github.com/zoedberg/bp-std", branch = "0.11.1-2" }
