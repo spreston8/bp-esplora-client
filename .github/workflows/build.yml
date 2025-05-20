@@ -34,7 +34,7 @@ jobs:
       fail-fast: false
       matrix:
         feature: [ blocking, blocking-https, blocking-https-rustls, blocking-https-native, blocking-https-bundled, blocking-wasm,
-          tokio, async, async-https, async-https-native, async-https-rustls, async-https-rustls-manual-roots ]
+                   tokio, async, async-https, async-https-native, async-https-rustls, async-https-rustls-manual-roots ]
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
@@ -73,7 +73,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        toolchain: [ nightly, beta, stable, 1.81.0 ]
+        toolchain: [ nightly, beta, stable, 1.82.0 ]
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@master
