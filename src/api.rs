@@ -91,7 +91,7 @@ pub struct Tx {
 #[derive(Deserialize, Clone, Debug)]
 pub struct Utxo {
     pub txid: Txid,
-    pub vout: Vec<Vout>,
+    pub vout: Vout,
     pub value: u64,
     pub status: TxStatus,
 }
