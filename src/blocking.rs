@@ -323,7 +323,7 @@ impl BlockingClient {
         self.get_response_json(&path)
     }
 
-    /// Get transaction history for the specified address/scripthash, sorted with newest first.
+    /// Get transaction history for the specified address, sorted with newest first.
     ///
     /// Returns up to 50 mempool transactions plus the first 25 confirmed transactions.
     /// More can be requested by specifying the last txid seen by the previous query.
@@ -340,7 +340,7 @@ impl BlockingClient {
         self.get_response_json(&path)
     }
 
-    /// Get confirmed transaction history for the specified address/scripthash,
+    /// Get confirmed transaction history for the specified scripthash,
     /// sorted with newest first. Returns 25 transactions per page.
     /// More can be requested by specifying the last txid seen by the previous query.
     pub fn scripthash_txs(
@@ -355,6 +355,27 @@ impl BlockingClient {
             Some(last_seen) => format!("/scripthash/{:x}/txs/chain/{}", script_hash, last_seen),
             None => format!("/scripthash/{:x}/txs", script_hash),
         };
+        self.get_response_json(&path)
+    }
+
+    /// Get unspent transaction outputs for the specified address.
+    pub fn address_utxo(
+        &self,
+        address: &Address,
+    ) -> Result<Vec<crate::Utxo>, Error> {
+        let path = format!("/address/{address}/utxo");
+        self.get_response_json(&path)
+    }
+
+    /// Get unspent transaction outputs for the specified scripthash.
+    pub fn scripthash_utxo(
+        &self,
+        script: &ScriptPubkey,
+    ) -> Result<Vec<crate::Utxo>, Error> {
+        let mut hasher = Sha256::default();
+        hasher.update(script);
+        let script_hash = hasher.finalize();
+        let path = format!("/scripthash/{script_hash:x}/utxo");
         self.get_response_json(&path)
     }
 

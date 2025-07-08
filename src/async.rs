@@ -430,6 +430,27 @@ impl<S: Sleeper> AsyncClient<S> {
         self.get_response_json(&path).await
     }
 
+    /// Get unspent transaction outputs for the specified address.
+    pub async fn address_utxo(
+        &self,
+        address: &Address,
+    ) -> Result<Vec<crate::Utxo>, Error> {
+        let path = format!("/address/{address}/utxo");
+        self.get_response_json(&path).await
+    }
+
+    /// Get unspent transaction outputs for the specified scripthash.
+    pub async fn scripthash_utxo(
+        &self,
+        script: &ScriptPubkey,
+    ) -> Result<Vec<crate::Utxo>, Error> {
+        let mut hasher = Sha256::default();
+        hasher.update(script);
+        let script_hash = hasher.finalize();
+        let path = format!("/scripthash/{script_hash:x}/utxo");
+        self.get_response_json(&path).await
+    }
+
     /// Get an map where the key is the confirmation target (in number of blocks)
     /// and the value is the estimated feerate (in sat/vB).
     pub async fn fee_estimates(&self) -> Result<HashMap<u16, f64>, Error> {
