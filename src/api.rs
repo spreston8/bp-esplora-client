@@ -91,7 +91,7 @@ pub struct Tx {
 #[derive(Deserialize, Clone, Debug)]
 pub struct Utxo {
     pub txid: Txid,
-    pub vout: Vout,
+    pub vout: u32,  // Changed from Vout to u32 to match Esplora API response format
     pub value: u64,
     pub status: TxStatus,
 }
