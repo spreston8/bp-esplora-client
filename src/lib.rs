@@ -183,7 +183,7 @@ impl Builder {
         Builder {
             base_url: base_url.to_string(),
             proxy: None,
-            timeout: None,
+            timeout: Some(30),
             headers: HashMap::new(),
             max_retries: DEFAULT_MAX_RETRIES,
         }

@@ -34,7 +34,7 @@ tokio = { version = "1", features = ["time"], optional = true }
 wasm-bindgen-test = "0.2"
 
 [features]
-default = ["blocking", "async", "async-https", "tokio"]
+default = ["blocking-https-native", "async", "async-https", "tokio"]
 blocking = ["minreq", "minreq/proxy"]
 blocking-https = ["blocking", "minreq/https"]
 blocking-https-rustls = ["blocking", "minreq/https-rustls"]
